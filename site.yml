@@ -1,4 +1,4 @@
-- name: Install HAPROXY-UBUNTU 16.04
+- name: Install HAPROXY-UBUNTU 16.04 LTS
   hosts: test_server
   remote_user: admin01
   become_method: sudo
