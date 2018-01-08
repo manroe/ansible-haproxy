@@ -1,0 +1,26 @@
+---
+- name: Haproxy is installed
+  apt: name="{{ item }}" state=installed
+  with_items:
+     - "{{ haproxy }}"
+  tags: install_haproxy
+
+- name: Haproxy is running and enabled
+  service: name=haproxy state=started enabled=yes
+  tags: start_and_enabled_haproxy
+
+- name: Enable init script
+  replace: dest='/etc/default/haproxy'
+         regexp='ENABLED=0'
+         replace='ENABLED=1'
+
+#- name: Backup existing Haproxy CFG
+#  command: cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak 
+
+- name: Update-backup Haproxy config
+  template: src=haproxy.cfg
+            dest=/etc/haproxy/haproxy.cfg
+            backup=yes
+
+- name: Restart Haproxy service
+  service: name=haproxy state=restarted

@@ -1,0 +1,9 @@
+- name: Install HAPROXY-UBUNTU 16.04
+  hosts: test_server
+  remote_user: admin01
+  become_method: sudo
+  become : yes
+  #sudo: yes
+  roles:
+     - update
+     - haproxy

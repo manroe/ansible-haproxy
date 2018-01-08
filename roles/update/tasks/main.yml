@@ -1,0 +1,8 @@
+- name: install aptitude
+  apt: name=aptitude state=installed 
+- name: update and upgrade apt packages
+  apt:
+      upgrade: yes
+      update_cache: yes
+      cache_valid_time: 86400 #one day
+  tags: update_upgrade_apt
